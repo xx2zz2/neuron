@@ -1,7 +1,8 @@
 cabal-version: 2.4
 name: neuron
--- This version must be in sync with what's in Default.dhall
-version: 0.5.2.0
+-- This version must be in sync with what's in Default.dhall, as well as
+-- Version.hs
+version: 0.5.2.1
 license: AGPL-3.0-only
 copyright: 2020 Sridhar Ratnakumar
 maintainer: srid@srid.ca
@@ -137,8 +138,6 @@ common app-common
     with-utf8,
     shower
   if (!flag(ghcid))
-    autogen-modules:
-      Paths_neuron
     other-modules:
       Data.Graph.Labelled
       Data.Graph.Labelled.Algorithm
@@ -160,7 +159,6 @@ common app-common
       Neuron.Web.View
       Neuron.Markdown
       Neuron.Zettelkasten.ID.Scheme
-      Paths_neuron
       Text.Megaparsec.Simple
 
 test-suite neuron-test

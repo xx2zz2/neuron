@@ -88,9 +88,9 @@ in {
       enableSeparateDataOutput = true;
     });
   in {
-    neuron = justStaticExecutables (dontHaddock (super.neuron.overrideDerivation (drv: {
+    neuron = makeExecutable (justStaticExecutables (dontHaddock (super.neuron.overrideDerivation (drv: {
         propagatedBuildInputs = drv.propagatedBuildInputs ++ [neuronSearchScript];
-    })));
+    }))));
 
     shake = dontCheck super.shake;
     modern-uri = dontCheck (self.callHackageDirect {
