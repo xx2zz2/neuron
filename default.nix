@@ -16,6 +16,8 @@ let
       ghc.js-dgtable 
       ghc.js-flot 
     ];
+    allowSubstitutes = true;
+    preferLocalBuild = false;
     postInstall = ''
       remove-references-to -t ${ghc.pandoc} $out/bin/neuron
       remove-references-to -t ${ghc.pandoc-types} $out/bin/neuron
@@ -42,6 +44,7 @@ let
       runHook postInstall
       '';
     allowSubstitutes = true;
+    preferLocalBuild = false;
     postInstall = ''
       remove-references-to -t ${haskellNeuron} $out/bin/neuron
       '';
