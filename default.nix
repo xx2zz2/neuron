@@ -1,8 +1,6 @@
 let 
   ghc = (import ./project.nix {}).ghc;
-  neuron = ghc.neuron;
-in 
-  neuron.overrideDerivation (drv: {
+  haskellNeuron = ghc.neuron.overrideDerivation (drv: {
     # Avoid transitive runtime dependency on the whole GHC distribution due to
     # Cabal's `Path_*` module thingy. For details, see:
     # https://github.com/NixOS/nixpkgs/blob/46405e7952c4b41ca0ba9c670fe9a84e8a5b3554/pkgs/development/tools/pandoc/default.nix#L13-L28
@@ -33,4 +31,11 @@ in
       remove-references-to -t /nix/store/vjf3s5d2f9zv2ip870k4jfb2lg9r5v93-pandoc-2.9.2.1-data $out/bin/neuron
       remove-references-to -t /nix/store/z38lbhs05zb0gryqpggr1mncm7r56a3a-js-dgtable-0.5.2-data $out/bin/neuron
     '';
-  })
+  });
+in 
+  (import <nixpkgs> {}).runCommand "neuron" { 
+    buildInputs = [ haskellNeuron ];
+  } ''
+    mkdir -p $out/bin
+    cp ${haskellNeuron}/bin/neuron $out/bin/neuron
+    ''
