@@ -32,10 +32,18 @@ let
       remove-references-to -t /nix/store/z38lbhs05zb0gryqpggr1mncm7r56a3a-js-dgtable-0.5.2-data $out/bin/neuron
     '';
   });
+  pkgs = import <nixpkgs> {};
+  neuronBin = pkgs.stdenvNoCC.mkDerivation {
+    name = "neuron";
+    buildInputs = [ haskellNeuron pkgs.removeReferencesTo ];
+    buildCommand = ''
+      mkdir -p $out/bin
+      cp ${haskellNeuron}/bin/neuron $out/bin/neuron
+      runHook postInstall
+      '';
+    postInstall = ''
+      remove-references-to -t ${haskellNeuron} $out/bin/neuron
+      '';
+    };
 in 
-  (import <nixpkgs> {}).runCommand "neuron" { 
-    buildInputs = [ haskellNeuron ];
-  } ''
-    mkdir -p $out/bin
-    cp ${haskellNeuron}/bin/neuron $out/bin/neuron
-    ''
+  neuronBin
