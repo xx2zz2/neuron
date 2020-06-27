@@ -27,5 +27,10 @@ in
       remove-references-to -t ${ghc.js-jquery} $out/bin/neuron
       remove-references-to -t ${ghc.js-dgtable} $out/bin/neuron
       remove-references-to -t ${ghc.js-flot} $out/bin/neuron
+      remove-references-to -t /nix/store/6cl2k4q0kllb8727vpwni0dxdycqg38m-js-jquery-3.3.1-data $out/bin/neuron
+      remove-references-to -t /nix/store/bicv5nnibqg0qsqyjvb3nw01447yms0j-shake-0.18.5-data $out/bin/neuron
+      remove-references-to -t /nix/store/qdh8gnxxw5y1fiklg7c3mdwpf3qablq5-js-flot-0.8.3-data $out/bin/neuron
+      remove-references-to -t /nix/store/vjf3s5d2f9zv2ip870k4jfb2lg9r5v93-pandoc-2.9.2.1-data $out/bin/neuron
+      remove-references-to -t /nix/store/z38lbhs05zb0gryqpggr1mncm7r56a3a-js-dgtable-0.5.2-data $out/bin/neuron
     '';
   })
