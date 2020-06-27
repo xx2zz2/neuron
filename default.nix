@@ -41,6 +41,7 @@ let
       cp ${haskellNeuron}/bin/neuron $out/bin/neuron
       runHook postInstall
       '';
+    allowSubstitutes = true;
     postInstall = ''
       remove-references-to -t ${haskellNeuron} $out/bin/neuron
       '';
